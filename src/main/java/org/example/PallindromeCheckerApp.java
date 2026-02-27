@@ -1,28 +1,34 @@
 package org.example;
 
 import java.util.Stack;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class PallindromeCheckerApp {
     public static void main(String[] args){
 
-        String text = "noon";
+        String input = "civic";
 
+        String processedInput = input.replaceAll("\\s+", "").toLowerCase();
+
+        Queue<Character> queue = new LinkedList<>();
         Stack<Character> stack = new Stack<>();
 
-        for (int i = 0; i < text.length(); i++) {
-            stack.push(text.charAt(i));
+        for (char ch : processedInput.toCharArray()) {
+            queue.add(ch);     // FIFO
+            stack.push(ch);    // LIFO
         }
 
         boolean isPalindrome = true;
 
-        for (int i = 0; i < text.length(); i++) {
-            if (text.charAt(i) != stack.pop()) {
+        while (!queue.isEmpty()) {
+            if (!queue.remove().equals(stack.pop())) {
                 isPalindrome = false;
                 break;
             }
         }
 
-        System.out.println("Input text: " + text);
-        System.out.println("Is it a Palindrome? : " + isPalindrome);
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + isPalindrome);
     }
 }
