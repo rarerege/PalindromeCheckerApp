@@ -1,24 +1,25 @@
 package org.example;
 
+import java.util.Stack;
+
 public class PallindromeCheckerApp {
     public static void main(String[] args){
 
-        String text = "radar";
+        String text = "noon";
 
-        char[] charArray = text.toCharArray();
+        Stack<Character> stack = new Stack<>();
 
-        int start = 0;
-        int end = charArray.length - 1;
+        for (int i = 0; i < text.length(); i++) {
+            stack.push(text.charAt(i));
+        }
 
         boolean isPalindrome = true;
 
-        while (start < end) {
-            if (charArray[start] != charArray[end]) {
+        for (int i = 0; i < text.length(); i++) {
+            if (text.charAt(i) != stack.pop()) {
                 isPalindrome = false;
                 break;
             }
-            start++;
-            end--;
         }
 
         System.out.println("Input text: " + text);
