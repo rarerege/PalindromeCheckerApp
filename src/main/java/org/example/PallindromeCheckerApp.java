@@ -1,15 +1,8 @@
-package org.example;
+// Service class that contains palindrome logic
+class PalindromeChecker {
 
-import java.util.*;
-
-
-public class PallindromeCheckerApp {
-
-    // Method to check palindrome
-    public static boolean isPalindrome(String str) {
-
-        // Normalize string: remove spaces and convert to lowercase
-        str = str.replaceAll("\\s+", "").toLowerCase();
+    // Method to check if a string is palindrome
+    public boolean checkPalindrome(String str) {
 
         int start = 0;
         int end = str.length() - 1;
@@ -24,12 +17,17 @@ public class PallindromeCheckerApp {
 
         return true;
     }
+}
+
+// Main Application class
+public class PallindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        String input = "A man a plan a canal Panama"; // Hardcoded input
+        String input = "racecar";   // Hardcoded input
 
-        boolean result = isPalindrome(input);
+        PalindromeChecker checker = new PalindromeChecker();
+        boolean result = checker.checkPalindrome(input);
 
         System.out.println("Input : " + input);
         System.out.println("Is Palindrome? : " + result);
