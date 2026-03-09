@@ -2,84 +2,33 @@ package org.example;
 
 import java.util.*;
 
-class Node {
-    char data;
-    Node next;
-
-    Node(char data) {
-        this.data = data;
-        this.next = null;
-    }
-}
-
-class SinglyLinkedList {
-    Node head;
-
-    public void add(char c) {
-        Node newNode = new Node(c);
-        if (head == null) {
-            head = newNode;
-            return;
-        }
-        Node current = head;
-        while (current.next != null) {
-            current = current.next;
-        }
-        current.next = newNode;
-    }
-
-    public Node reverse(Node start) {
-        Node prev = null;
-        Node current = start;
-        Node next = null;
-        while (current != null) {
-            next = current.next;
-            current.next = prev;
-            prev = current;
-            current = next;
-        }
-        return prev;
-    }
-
-    public boolean isPalindrome() {
-        if (head == null || head.next == null) {
-            return true;
-        }
-        Node slow = head;
-        Node fast = head;
-        while (fast.next != null && fast.next.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-        Node secondHalfStart = reverse(slow.next);
-        Node firstHalfStart = head;
-        Node secondHalfCopy = secondHalfStart;
-        boolean palindrome = true;
-        while (secondHalfStart != null) {
-            if (firstHalfStart.data != secondHalfStart.data) {
-                palindrome = false;
-                break;
-            }
-            firstHalfStart = firstHalfStart.next;
-            secondHalfStart = secondHalfStart.next;
-        }
-        slow.next = reverse(secondHalfCopy); // Restore original list
-        return palindrome;
-    }
-}
-
 
 public class PallindromeCheckerApp {
-    public static void main(String[] args){
 
-        String input = "level";
+        // Recursive method to check palindrome
+        public static boolean isPalindrome(String str, int start, int end) {
 
-        SinglyLinkedList list = new SinglyLinkedList();
-        for (char c : input.toCharArray()) {
-            list.add(c);
+            // Base condition
+            if (start >= end) {
+                return true;
+            }
+
+            // If characters don't match
+            if (str.charAt(start) != str.charAt(end)) {
+                return false;
+            }
+
+            // Recursive call
+            return isPalindrome(str, start + 1, end - 1);
         }
 
-        System.out.println("Input : " + input);
-        System.out.println("Is Palindrome? : " + list.isPalindrome());
+        public static void main(String[] args) {
+
+            String input = "madam"; // Hardcoded input
+
+            boolean result = isPalindrome(input, 0, input.length() - 1);
+
+            System.out.println("Input : " + input);
+            System.out.println("Is Palindrome? : " + result);
+        }
     }
-}
