@@ -5,30 +5,33 @@ import java.util.*;
 
 public class PallindromeCheckerApp {
 
-        // Recursive method to check palindrome
-        public static boolean isPalindrome(String str, int start, int end) {
+    // Method to check palindrome
+    public static boolean isPalindrome(String str) {
 
-            // Base condition
-            if (start >= end) {
-                return true;
-            }
+        // Normalize string: remove spaces and convert to lowercase
+        str = str.replaceAll("\\s+", "").toLowerCase();
 
-            // If characters don't match
+        int start = 0;
+        int end = str.length() - 1;
+
+        while (start < end) {
             if (str.charAt(start) != str.charAt(end)) {
                 return false;
             }
-
-            // Recursive call
-            return isPalindrome(str, start + 1, end - 1);
+            start++;
+            end--;
         }
 
-        public static void main(String[] args) {
-
-            String input = "madam"; // Hardcoded input
-
-            boolean result = isPalindrome(input, 0, input.length() - 1);
-
-            System.out.println("Input : " + input);
-            System.out.println("Is Palindrome? : " + result);
-        }
+        return true;
     }
+
+    public static void main(String[] args) {
+
+        String input = "A man a plan a canal Panama"; // Hardcoded input
+
+        boolean result = isPalindrome(input);
+
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + result);
+    }
+}
